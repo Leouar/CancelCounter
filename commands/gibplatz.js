@@ -14,7 +14,6 @@ module.exports = {
         const amount = interaction.options.getInteger("platz") - 1;
         const userIds = [...cancelMap.keys()];
         userIds.sort((a,b) => {return cancelMap.get(b) - cancelMap.get(a)});
-        console.log(userIds[amount]);
         await interaction.reply(`Den ${amount + 1}. belegt ${(await interaction.guild.members.fetch(userIds[amount])).displayName} und wurde ${cancelMap.get(userIds[amount])} mal gecancelt!`);
        
 	},
