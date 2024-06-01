@@ -9,7 +9,7 @@ module.exports = {
 
 	async execute(interaction) {
         const user = interaction.options.getUser("opfer") ?? interaction.user;
-        const amount = interaction.options.getInteger("mächtigkeit") ?? 1;
+        const amount = interaction.options.getInteger("mächtigkeit") ?? 1; //TODO remove the ability to negativ cancel
 
         cancelMap.set(user.id, (cancelMap.get(user.id) ?? 0) + amount);
 

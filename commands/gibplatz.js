@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
+const helper = require("../helper.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -12,9 +13,8 @@ module.exports = {
 
 	async execute(interaction) {
         const amount = interaction.options.getInteger("platz") - 1;
-        const userIds = [...cancelMap.keys()];
-        userIds.sort((a,b) => {return cancelMap.get(b) - cancelMap.get(a)});
-        await interaction.reply(`Den ${amount + 1}. belegt ${(await interaction.guild.members.fetch(userIds[amount])).displayName} und wurde ${cancelMap.get(userIds[amount])} mal gecancelt!`);
+        const userIds = helper.sortMap();
+        await interaction.reply(`Den ${amount + 1}. Platz belegt ${(await interaction.guild.members.fetch(userIds[amount])).displayName} und wurde ${cancelMap.get(userIds[amount])} mal gecancelt!`);
        
 	},
 };
