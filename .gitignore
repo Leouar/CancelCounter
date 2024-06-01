@@ -2,5 +2,3 @@ configJson.json
 .eslintrc.json
 node_modules
 cancelJson.json
-.local
-.viminfo
