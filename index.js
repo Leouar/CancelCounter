@@ -45,7 +45,7 @@ client.once(Events.ClientReady, readyClient => {
         } catch(error) {
            console.error("HAT NICHT GESPEICHERT!!!! WOMP WOMP");
         }
-    }, 30000 ); //save every 10min
+    }, 600000 ); //save every 10min
 });
 
 client.on(Events.InteractionCreate, async interaction => {
@@ -65,18 +65,6 @@ client.on(Events.InteractionCreate, async interaction => {
             await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
         } else {
             await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-        }
-    }
-});
-
-process.once("exit",() => {
-    if(cancelMap.size > 0){
-        try {
-            const cancelObj = Object.fromEntries(cancelMap);
-            const cancelJson = JSON.stringify(cancelObj);
-            fs.writeFileSync("./cancelJson.json", cancelJson);
-        } catch(error) {
-            console.error("HAT NICHT GESPEICHERT!!!! WOMP WOMP");
         }
     }
 });
