@@ -8,12 +8,17 @@ module.exports = {
                 .addIntegerOption(option => option.setName("mächtigkeit").setDescription("ja")),
 
 	async execute(interaction) {
-        const user = interaction.options.getUser("opfer") ?? interaction.user;
-        const amount = interaction.options.getInteger("mächtigkeit") ?? 1; //TODO remove the ability to negativ cancel
+        const amount = interaction.options.getInteger("mächtigkeit") ?? 1;
+        
+        if(amount >= 1){
+                const user = interaction.options.getUser("opfer") ?? interaction.user;
+                cancelMap.set(user.id, (cancelMap.get(user.id) ?? 0) + amount);
 
-        cancelMap.set(user.id, (cancelMap.get(user.id) ?? 0) + amount);
-
-        await interaction.reply(`${user} wurde ${amount} mal gecancelt!`);
+                await interaction.reply(`${user} wurde ${amount} mal gecancelt!`);
+        }
+        else{
+                await interaction.reply(`Nicht negative canceln du kek!`)
+        }
         
 	},
 };

@@ -9,7 +9,14 @@ module.exports = {
 	async execute(interaction) {
 		const userIds = helper.sortMap();
         const member = interaction.options.getMember("target") ?? interaction.member;
-		await interaction.reply(`${member.displayName} wurde insgesamt ${cancelMap.get(member.user.id)} mal gecancelt und belegt damit Platz ${userIds.indexOf(member.user.id) + 1}!`);
-		
+		let output = "";
+
+		if(cancelMap.get(member.user.id) != undefined){ 
+			output = `${member.displayName} wurde insgesamt ${cancelMap.get(member.user.id)} mal gecancelt und belegt damit Platz ${userIds.indexOf(member.user.id) + 1}!`;
+		}
+		else{
+			output = `${member.displayName} hat noch keine Einträge!`;
+		}
+	await interaction.reply(output);
 	},
 };
